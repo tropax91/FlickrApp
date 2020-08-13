@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Card, Input } from 'reactstrap';
 
 export class Home extends Component {
     constructor() {
         super();
         this.state = {
-            pictures : [],
+            pictures: [],
+            inputValue: ''
         };
     }
 
@@ -13,7 +15,10 @@ export class Home extends Component {
         fetch("https://localhost:44325/api/content/FlickrCall")
             .then(response => response.json())
             .then(result => {
-                this.setState({ pictures: result })
+                this.setState({ pictures: result });
+            })
+            .catch(err => {
+                throw Error(err.message);
             })
     }
 
@@ -22,11 +27,15 @@ export class Home extends Component {
 
   render () {
     return (
-      <div>
-            <h1>Hello, world!</h1>
-            {this.state.pictures.map((picture, index) => (
-                <img alt="" src={picture} ></img>
+        <div>
+            <div>
+                <Input type="text" placeholder="Search" />
+            </div>
+            <Card>
+                {this.state.pictures.map((picture, index) => (
+                    <img alt="" key={index} src={picture} ></img>
                 ))}
+            </Card>
       </div>
     );
   }
