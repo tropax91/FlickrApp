@@ -23,17 +23,12 @@ namespace FlickrApp.Requests
             XmlNodeList NodeList;
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
-            //using (StreamReader reader = new StreamReader(stream))
             {
-                //content = reader.ReadToEnd();
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(stream);
                 NodeList = xDoc.GetElementsByTagName("link");
-                
-               
-
             }
-            return NodeList.Cast<XmlNode>()/*.Where(node => node.Attributes["type"].Value == "image/jpeg")*/.Select(node => node.Attributes["href"].Value).ToList();
+            return NodeList.Cast<XmlNode>().Select(node => node.Attributes["href"].Value).ToList();
         }
     }
 }

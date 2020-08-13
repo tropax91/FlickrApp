@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Input } from 'reactstrap';
 
+
 export class Home extends Component {
     constructor() {
         super();
@@ -31,11 +32,12 @@ export class Home extends Component {
             <div>
                 <Input type="text" placeholder="Search" />
             </div>
-            <Card>
+                
+            <div className='grid-list'>
                 {this.state.pictures.map((picture, index) => (
-                    <img alt="" key={index} src={picture} ></img>
+                    <img className='Image' alt="" key={index} src={picture} style={{ width: 300 }}></img>
                 ))}
-            </Card>
+            </div>
       </div>
     );
   }
